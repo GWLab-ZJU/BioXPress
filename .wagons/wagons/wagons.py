@@ -8,15 +8,12 @@ class wagon:
         self.ver = ver
         self.forward = forward
         self.path = os.path.abspath(path)
-        if os.system("bash '" + self.path + "/self-check.sh'") != 0:
-            raise ChildProcessError("Self check of " + self.__str__() + " failed.")
 
     def __str__(self):
         return self.name + "," + str(self.ver)
 
     def __repr__(self):
         return self.__str__()
-
 
 class wagonchain:
     def __init__(self):
