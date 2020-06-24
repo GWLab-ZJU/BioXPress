@@ -1,18 +1,7 @@
 #!/usr/bin/env bash
-
 set -ue
-# FROM LIBISOPT V1P3
-function isopt() {
-    case "${1:-}" in
-    -? | --* | -?\:* | --*\:*)
-        return 0
-        ;;
-    *)
-        return 1
-        ;;
-    esac
-}
 DN="$(readlink -f "$(dirname "${0}")")"
+. "${DN}/exec/libisopt.sh"
 # ============ Possess arguments ============
 
 STDS=()
@@ -23,19 +12,19 @@ for opt in "${@}"; do
             echo "Help should be added here."
             exit 0
             ;;
-        "-v" | "--version")
-            echo "Version 0"
-            exit 0
-            ;;
+        *)
+        	STDS=("${STDS[@]}" "${opt}")
+        	;;
         esac
     else
         STDS=("${STDS[@]}" "${opt}")
     fi
 done
-cmd=${STDS[0]:-}
+cmd="${STDS[0]:-}"
 unset STDS[0]
 if [ -z "${cmd}" ]; then
-    exit 0
+	echo -e "\e[31mERROR: Subcommand not provided. Use 'bioxp list' to get all subcommands.\e[0m"
+    exit 1
 elif [ -e "${DN}"/exec/bioxp_"${cmd}".sh ];then
     bash "${DN}"/exec/bioxp_"${cmd}".sh "${STDS[@]}"
 else

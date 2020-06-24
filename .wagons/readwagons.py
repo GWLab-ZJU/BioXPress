@@ -20,16 +20,10 @@ for dir in os.listdir():
             raise ValueError("wagon.conf corrupted.")
         tmpwagon = wagon(tmpname, tmpver, tmpfwd, dir)
         mywc.append(tmpwagon)
-print("\033[033mLoad complete, sorting...\033[0m")
-mywc.sort()
-print("\033[033mSort complete, configuring...\033[0m")
-for i in range(len(mywc.llist)):
-    print("\033[033mConfiguring step "+str(i)+" ...\033[0m")
-    for item in mywc.llist[i]:
-        if os.system("bash '"+item.path+"'/configure.sh") !=0:
-            raise ChildProcessError("Configuration for "+str(item)+" failed!")
-print("\033[033mConfigure complete, generating start.sh...\033[0m")
-fw=open("start.sh","a")
-fw.write("bash '"+mywc.llist[0][0].path+"'/start.sh\n")
+if mywc.list==[]:
+    print("\033[031mERROR: No wagon in this directory. Please execute 'bioxp init' first.\033[0m")
+fw=open(".version","w")
+for item in mywc.list:
+    fw.write(item.name+"\t"+str(item.ver)+"\n")
 fw.close()
-print("\033[033mstart.sh generated. Program finished.\033[0m")
+mywc.sort()

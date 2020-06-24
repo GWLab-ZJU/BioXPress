@@ -1,2 +1,6 @@
 .idea 
 *.pyc
+/*.bioxp
+/start.sh
+/.version
+/.wagons/.version

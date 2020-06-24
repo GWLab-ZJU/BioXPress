@@ -1,0 +1,4 @@
+[submodule ".wagons"]
+	path = .wagons
+	url = https://github.com/GWLab-ZJU/wagons.bioxp
+    branch = trunk
