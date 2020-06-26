@@ -3,11 +3,13 @@ import os
 
 
 class wagon:
-    def __init__(self, name: str, ver: float, forward: list, path: str):
+    def __init__(self, name: str, ver: float, forward: list, path: str, bindep: list, filedep: list):
         self.name = name
         self.ver = ver
         self.forward = forward
         self.path = os.path.abspath(path)
+        self.bindep = bindep
+        self.filedep = filedep
 
     def __str__(self):
         return self.name + "," + str(self.ver)
@@ -15,12 +17,15 @@ class wagon:
     def __repr__(self):
         return self.__str__()
 
+
 class wagonchain:
     def __init__(self):
         self.__index = 0
         self.list = []
         self.sorted = False
         self.llist = []
+        self.bindep = []
+        self.filedep = []
 
     def __contains__(self, item: wagon):
         return item in self.list
@@ -32,6 +37,13 @@ class wagonchain:
     def sort(self):
         self.self_check()
         listcopy = self.list.copy()
+        for wagonitem in self.list:
+            self.bindep.extend(wagonitem.bindep)
+            self.filedep.extend(wagonitem.filedep)
+        self.bindep=list(set(self.bindep))
+        self.bindep.sort()
+        self.filedep = list(set(self.filedep))
+        self.filedep.sort()
         self.llist = [[]]
         for i in range(len(listcopy)):
             if listcopy[i].forward == []:
@@ -60,7 +72,7 @@ class wagonchain:
                         self.llist[layer].append(item)
             if self.llist[layer] == []:
                 Ended = True
-        self.llist=self.llist[0:-1]
+        self.llist = self.llist[0:-1]
         self.sorted = True
 
     def self_check(self):

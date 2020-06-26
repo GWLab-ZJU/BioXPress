@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -ue
+cd "$(readlink -f "$(dirname "${0}")")"
 echo -e "\e[33mConfiguring original...\e[0m"
 if [ -f "origin.conf" ];then
 	if [ "${1}" = "force" ];then

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ue
 DN="$(readlink -f "$(dirname "${0}")")"
-. "${DN}/exec/libisopt.sh"
+. "${DN}/exec/__libisopt.sh"
 # ============ Possess arguments ============
 
 STDS=()

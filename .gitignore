@@ -4,3 +4,5 @@
 /start.sh
 /.version
 /.wagons/.version
+/.bindep
+/.filedep
