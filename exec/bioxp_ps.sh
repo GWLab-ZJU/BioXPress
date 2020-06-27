@@ -22,12 +22,13 @@ for opt in "${@}"; do
 done
 if [[ "${PWD}" =~ .+".bioxp" ]];then
 	echo -e "\e[033mSliding into wagon ${PWD}...\e[0m"
+	python "${DN}"/__bioxp_ps_sub.py
 elif [ ${#STDS[@]} -eq 0 ]; then
 	cd "${DN}"/..
 	for dir in *.bioxp; do
 		echo -e "\e[033mSliding into wagon ${dir}...\e[0m"
 		cd "${dir}"
-
+		python "${DN}"/__bioxp_ps_sub.py
 		cd ..
 	done
 else
@@ -36,7 +37,7 @@ else
 		if [ -d "${dir}".bioxp ]; then
 			echo -e "\e[033mSliding into wagon ${dir}...\e[0m"
 			cd "${dir}".bioxp
-
+			python "${DN}"/__bioxp_ps_sub.py
 			cd ..
 		fi
 	done

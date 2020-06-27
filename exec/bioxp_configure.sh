@@ -32,7 +32,6 @@ if [ ${#STDS[@]} -eq 0 ];then
 else
 	for item in "${STDS[@]}";do
 		if [ -e "${item}".bioxp ];then
-			echo -e "\033[033mConfiguring wagon ${item}\033[0m"
 			bash "${item}".bioxp/configure.sh "${ARGV}"
 		else
 			echo -e "\033[031mERROR: Wagon ${item} not found\033[0m"
