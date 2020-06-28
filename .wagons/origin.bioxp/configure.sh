@@ -2,20 +2,14 @@
 set -ue
 cd "$(readlink -f "$(dirname "${0}")")"
 echo -e "\e[33mConfiguring wagon origin...\e[0m"
-if [ -f "start.sh" ];then
-	if [ "${1}" = "force" ];then
-		rm "start.sh"
-	elif [ "${1}" = "ignore" ];then
-		echo -e "\033[031mWARNING: Directory not clear\033[0m"
-		exit 0
+mkdir -p reg
+if [ -e ENA_FQ.conf ] ;then
+	if cat wagon.conf|grep 'bindep=ascp' &>>/dev/null;then
+		echo "bindep=ascp">>wagon.conf
 	fi
-fi
-cp exec/__start.sh start.sh
-if [ -e ENA-FQ.conf ];then
-	echo "bindep=ascp">>wagon.conf
 else
 	if ! ls *.fq *.fastq *.fq.gz *.fastq.gz &>>/dev/null;then
-		echo -e "\033[031mERROR: Please add your fastq file, or add FNA-FQ.conf.\033[0m"
+		echo -e "\033[031mERROR: Please add your fastq file, or add FNA_FQ.conf.\033[0m"
 		exit 1
 	fi
 fi

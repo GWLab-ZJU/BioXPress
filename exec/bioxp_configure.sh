@@ -27,7 +27,7 @@ for opt in "${@}"; do
 done
 if [ ${#STDS[@]} -eq 0 ];then
 	echo -e "\033[033mWill configure all wagons and check dependencies\033[0m"
-	cp exec/__start.sh start.sh
+	cp exec/__bioxp_start.sh exec/bioxp_start.sh
 	python .wagons/bioxp_configure.py "${ARGV}"
 else
 	for item in "${STDS[@]}";do
@@ -37,5 +37,5 @@ else
 			echo -e "\033[031mERROR: Wagon ${item} not found\033[0m"
 		fi
 	done
-	echo -e "\033[033mFinished\033[0m"
+	echo -e "\033[033mFinished. Use 'bioxp start' to start\033[0m"
 fi

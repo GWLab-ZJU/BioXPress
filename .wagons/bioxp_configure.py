@@ -11,12 +11,12 @@ for i in range(len(mywc.llist)):
         if os.system("bash '"+item.path+"'/configure.sh "+sys.argv[1]) !=0:
             raise ChildProcessError("Configuration for "+str(item)+" failed!")
     print("\033[032mSUCCESS!\033[0m")
-if sys.argv[1]=="ignore" and os.path.isfile("start.sh"):
-    print("\033[032mstart.sh already generated. Program finished.\033[0m")
+if sys.argv[1]=="ignore" and os.path.isfile("exec/bioxp_start.sh"):
+    print("\033[032mexec/bioxp_start.sh already generated. Program finished.\033[0m")
     exit(0)
-print("\033[033mConfigure complete, generating start.sh...\033[0m",end='')
-fw=open("start.sh","a")
-fw.write("bash '"+mywc.llist[0][0].path+"'/start.sh\n")
+print("\033[033mConfigure complete, generating exec/bioxp_start.sh...\033[0m",end='')
+fw=open("exec/bioxp_start.sh","a")
+fw.write("bash '"+mywc.llist[0][0].path+"'/bioxp_start.sh\n")
 fw.close()
 print("\033[032mSUCCESS!\033[0m")
-print("\033[032mstart.sh generated. Program finished.\033[0m")
+print("\033[032mexec/bioxp_start.sh generated. Program finished.\033[0m")
