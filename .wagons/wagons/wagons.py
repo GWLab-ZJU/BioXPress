@@ -3,10 +3,11 @@ import os
 
 
 class wagon:
-    def __init__(self, name: str, ver: float, forward: list, path: str, bindep: list, filedep: list):
+    def __init__(self, name: str, ver: float, forward: list,inc:list, path: str, bindep: list, filedep: list):
         self.name = name
         self.ver = ver
         self.forward = forward
+        self.inc=inc
         self.path = os.path.abspath(path)
         self.bindep = bindep
         self.filedep = filedep
@@ -80,6 +81,9 @@ class wagonchain:
         for wagon_item in self.list:
             names.append(wagon_item.name)
         for wagon_item in self.list:
+            for wagon_inc in wagon_item.inc:
+                if wagon_inc in names:
+                    raise ValueError("Incompatiable wagon " + wagon_inc + " found for "+ str(wagon_item))
             for wagon_fwd in wagon_item.forward:
                 if not wagon_fwd in names:
-                    raise ValueError("Wagon " + str(wagon_fwd) + " needed.")
+                    raise ValueError("Wagon " + str(wagon_fwd) + " needed for "+str(wagon_item))

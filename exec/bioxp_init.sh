@@ -25,6 +25,8 @@ for opt in "${@}"; do
 		esac
 	fi
 done
+mkdir -p etc
+touch etc/bin.conf etc/file.conf etc/jobsys.conf
 if { ! ${ISIGNORE}; } && { ls *.bioxp &>>/dev/null || [ -f "start.sh" ]; }; then
 	echo -e "\033[031mERROR: Directory not clear.
 	Please execute 'bioxp distclean' to remove old files if you want to start a new experiment;
@@ -52,4 +54,6 @@ else
 		cp -r .wagons/"${line}".bioxp .
 	done
 fi
+python exec/__md2usage.py doc/init.md
+python .wagons/bioxp_init.py
 echo -e "\033[032mInitialize finished, please configure each step and execute 'bioxp configure' to detect all configuration files.\033[0m"

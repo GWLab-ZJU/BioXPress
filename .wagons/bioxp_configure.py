@@ -1,14 +1,26 @@
 from readwagons import *
 import sys
+DN=os.path.abspath(os.path.dirname(sys.argv[0]))
+print("\033[033mConfigure complete, checking etc/",end='')
+fr=open(DN+"/../etc/jobsys.conf")
+jobsys=fr.read().strip()
+fr.close()
+if jobsys=="bsub":
+    mywc.bindep.extend(["bsub","bkill","bjobs","bhosts"])
+elif jobsys=="ylsjs":
+    mywc.bindep.extend(["ylsjs"])
+fw=fr=open(DN+"/../.bindep","a")
+fw.writelines(tmpbindep)
+fw.close()
 print("\033[033mChecking dependencies...\033[0m",end='')
-if os.system("bash '"+os.path.abspath(os.path.dirname(sys.argv[0]))+"'/chkdep.sh") !=0:
+if os.system("bash '"+DN+"'/chkdep.sh") !=0:
     raise EnvironmentError("Dependency check failed.")
 print("\033[032mSUCCESS!\033[0m")
 print("\033[032mSort complete, configuring...\033[0m")
 for i in range(len(mywc.llist)):
     print("\033[033mConfiguring step "+str(i)+" ...\033[0m",end='')
     for item in mywc.llist[i]:
-        if os.system("bash '"+item.path+"'/configure.sh "+sys.argv[1]) !=0:
+        if os.system("bash '"+item.path+"'/exec/configure.sh "+sys.argv[1]) !=0:
             raise ChildProcessError("Configuration for "+str(item)+" failed!")
     print("\033[032mSUCCESS!\033[0m")
 if sys.argv[1]=="ignore" and os.path.isfile("exec/bioxp_start.sh"):

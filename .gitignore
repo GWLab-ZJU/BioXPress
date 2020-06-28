@@ -1,9 +1,9 @@
 .idea 
 *.pyc
 /*.bioxp
-/start.sh
 /.version
 /.wagons/.version
 /.bindep
 /.filedep
-/etc
+/etc/*.conf
+/exec/bioxp_start.sh
