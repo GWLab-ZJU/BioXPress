@@ -42,4 +42,4 @@ else
 		fi
 	done
 fi
-echo -e "\033[033mFinished\033[0m"
+echo -e "\e[033mFinished\e[0m"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ue
-echo -e "\033[033mlist -- Listing all bioxp commands\033[0m"
+echo -e "\e[033mlist -- Listing all bioxp commands\e[0m"
 cd "$(readlink -f "$(dirname "${0}")")"
 . __libisopt.sh
 for opt in "${@}"; do
@@ -18,4 +18,4 @@ for opt in "${@}"; do
     fi
 done
 ls -1 |grep 'bioxp_.*\.sh'|sed -s 's;^bioxp_;;'|sed -s 's;\.sh$;;'
-echo -e "\033[033mFinished\033[0m"
+echo -e "\e[033mFinished\e[0m"

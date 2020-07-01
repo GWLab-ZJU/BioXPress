@@ -26,7 +26,7 @@ Another center component of BioXPress is process. The processing management mach
 2. The second wagon will initiate several sub-processes, one for each cluster (A *cluster* is a set of files satisfying the minimal of starting a process. For example, a cluster of wagon `fastqc` includes 1 `fastq` file, while a cluster of wagon `bwa` includes 2 `fastq` file). Then this sub-process will wait until the cluster is prepared by previous wagon.
 3. The loop will continue until reaching the end or when error occurred.
 
-The BioXPress might use an external job system. We currently support IBM LSF (`bsub`) and YuZJLab YLSJS (`ylsjs`). You may specify them in `etc/jobsys.conf`.
+The BioXPress might use an external job system. We currently support IBM LSF (`bsub`). You may specify them in `etc/jobsys.conf`.
 
 ## BioXPress Workflow
 

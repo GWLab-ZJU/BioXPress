@@ -15,24 +15,24 @@ if [ -e "ENA_FQ.conf" ]; then
 			fn="${id##*/}"
 			if ! ls reg/"${fn}".* &>>/dev/null; then
 				DO ascp -QT -l 300m -P33001 -i asperaweb_id_dsa.openssh era-fasp@${id} . &
-				DOPID=$!
+				DOPID=${!}
 				echo ${DOPID} >reg/"${fn}".doing
 				wait ${DOPID}
-				if ! [ -f "${fn}" ];then
+				if ! [ -f "${fn}" ]; then
 					echo -e "\e[031mERROR: Failed to download ${fn}\e[0m"
 					exit 1
 				fi
 				fn_fq="$(echo "${fn}" | sed 's;\.fastq;\.fq;')"
-				if [[ "${fn}" =~ .*\.fastq.* ]];then
+				if [[ "${fn}" =~ .*\.fastq.* ]]; then
 					mv "${fn}" "${fn_fq}"
 				fi
 				if [[ "${fn_fq}" =~ .*\.fq ]]; then
-					gzip "${fn_fq}"
+					gzip -1 "${fn_fq}"
 				fi
 				mv reg/"${fn}".doing reg/"${fn}".done
 			else
 				echo -e "\e[031mWARNING: Lock file exists for ${line}\e[0m"
-				if ! [ -f "${fn}" ];then
+				if ! [ -f "${fn}" ]; then
 					echo -e "\e[031mERROR: Failed to download ${fn}.\e[0m"
 					exit 1
 				fi

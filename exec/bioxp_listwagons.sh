@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ue
-echo -e "\033[033mlistwagons -- Listing all bioxp wagons\033[0m"
+echo -e "\e[033mlistwagons -- Listing all bioxp wagons\e[0m"
 cd "$(readlink -f "$(dirname "${0}")"/../)"
 . exec/__libisopt.sh
 ARGV=""
@@ -41,4 +41,4 @@ python readwagons.py &>>/dev/null
 rm -f .bindep .filedep
 cd ..
 python exec/__bioxp_version_diff.py "${ARGV}"
-echo -e "\033[033mFinished\033[0m"
+echo -e "\e[033mFinished\e[0m"

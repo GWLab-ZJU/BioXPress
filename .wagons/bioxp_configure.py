@@ -7,8 +7,6 @@ jobsys=fr.read().strip()
 fr.close()
 if jobsys=="bsub":
     mywc.bindep.extend(["bsub","bkill","bjobs","bhosts"])
-elif jobsys=="ylsjs":
-    mywc.bindep.extend(["ylsjs"])
 fw=fr=open(DN+"/../.bindep","a")
 fw.writelines(tmpbindep)
 fw.close()

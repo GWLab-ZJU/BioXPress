@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ue
-echo -e "\033[033mconfig -- Configure all/specific wagon(s)\033[0m"
+echo -e "\e[033mconfig -- Configure all/specific wagon(s)\e[0m"
 cd "$(readlink -f "$(dirname "${0}")"/../)"
 . exec/__libisopt.sh
 STDS=()
@@ -18,7 +18,7 @@ for opt in "${@}"; do
             ;;
         "-i"|"--ignore")
         	ARGV="ignore"
-        	echo -e "\033[033mWill pass 'ignore' argument to each configure.sh\033[0m"
+        	echo -e "\e[033mWill pass 'ignore' argument to each configure.sh\e[0m"
         	;;
         esac
     else
@@ -26,7 +26,7 @@ for opt in "${@}"; do
     fi
 done
 if [ ${#STDS[@]} -eq 0 ];then
-	echo -e "\033[033mWill configure all wagons and check dependencies\033[0m"
+	echo -e "\e[033mWill configure all wagons and check dependencies\e[0m"
 	cp exec/__bioxp_start.sh exec/bioxp_start.sh
 	python .wagons/bioxp_configure.py "${ARGV}"
 else
@@ -34,8 +34,8 @@ else
 		if [ -e "${item}".bioxp ];then
 			bash "${item}".bioxp/exec/configure.sh "${ARGV}"
 		else
-			echo -e "\033[031mERROR: Wagon ${item} not found\033[0m"
+			echo -e "\e[031mERROR: Wagon ${item} not found\e[0m"
 		fi
 	done
-	echo -e "\033[033mFinished. Use 'bioxp start' to start\033[0m"
+	echo -e "\e[033mFinished. Use 'bioxp start' to start\e[0m"
 fi

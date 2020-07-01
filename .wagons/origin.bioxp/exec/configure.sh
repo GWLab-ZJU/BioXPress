@@ -12,7 +12,7 @@ if [ -e ENA_FQ.conf ]; then
 	fi
 else
 	if ! ls *.fq *.fastq *.fq.gz *.fastq.gz &>>/dev/null; then
-		echo -e "\033[031mERROR: Please add your fastq file, or add FNA_FQ.conf.\033[0m"
+		echo -e "\e[031mERROR: Please add your fastq file, or add FNA_FQ.conf.\e[0m"
 		exit 1
 	fi
 fi
